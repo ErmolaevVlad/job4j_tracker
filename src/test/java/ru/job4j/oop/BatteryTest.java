@@ -1,9 +1,9 @@
-package ru.job4j.tracker.oop;
+package ru.job4j.oop;
 
 import org.junit.jupiter.api.Test;
+import ru.job4j.oop.Battery;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class BatteryTest {
 
