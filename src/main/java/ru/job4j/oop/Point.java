@@ -4,7 +4,6 @@ import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
 public class Point {
-
     private int x;
     private int y;
 
