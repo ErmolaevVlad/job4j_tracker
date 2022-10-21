@@ -26,18 +26,32 @@ public class Tracker {
                 i++;
             }
         }
-        rsl = Arrays.copyOf(rsl, i);
-        return rsl;
+        return Arrays.copyOf(rsl, i);
     }
 
     public Item findById(int id) {
-        Item rsl = null;
+        int index = indexOf(id);
+        return index != -1 ? items[index] : null;
+    }
+
+    private int indexOf(int id) {
+        int rsl = -1;
         for (int index = 0; index < size; index++) {
-            Item item = items[index];
-            if (item.getId() == id) {
-                rsl = item;
+            if (items[index].getId() == id) {
+                rsl = index;
                 break;
             }
+        }
+        return rsl;
+    }
+
+    public boolean replace(int id, Item item) {
+        int index = indexOf(id);
+        boolean rsl = false;
+        if (index >= 0) {
+            this.items[index] = item;
+            this.items[index].setId(id);
+            rsl = true;
         }
         return rsl;
     }
