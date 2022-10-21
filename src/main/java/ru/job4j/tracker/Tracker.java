@@ -37,9 +37,11 @@ public class Tracker {
     private int indexOf(int id) {
         int rsl = -1;
         for (int index = 0; index < size; index++) {
-            if (items[index].getId() == id) {
-                rsl = index;
-                break;
+            if (items[index] != null) {
+                if (items[index].getId() == id) {
+                    rsl = index;
+                    break;
+                }
             }
         }
         return rsl;
@@ -51,6 +53,17 @@ public class Tracker {
         if (index >= 0) {
             this.items[index] = item;
             this.items[index].setId(id);
+            rsl = true;
+        }
+        return rsl;
+    }
+
+    public boolean delete(int id) {
+        boolean rsl = false;
+        int index = indexOf(id);
+        if (index != -1) {
+            System.arraycopy(this.items, index + 1, this.items, index, size - index - 1);
+            this.items[size - 1] = null;
             rsl = true;
         }
         return rsl;
