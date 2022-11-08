@@ -50,7 +50,7 @@ public class Tracker {
         boolean rsl = false;
         if (index >= 0) {
             this.items[index] = item;
-            this.items[index].setId(id);
+            item.setId(id);
             rsl = true;
         }
         return rsl;
