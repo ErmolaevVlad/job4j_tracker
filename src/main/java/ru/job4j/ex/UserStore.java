@@ -1,7 +1,5 @@
 package ru.job4j.ex;
 
-import java.util.Arrays;
-
 public class UserStore {
     public static User findUser(User[] users, String login) throws UserNotFoundException {
         User user = null;
