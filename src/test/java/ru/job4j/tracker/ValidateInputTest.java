@@ -37,6 +37,8 @@ class ValidateInputTest {
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");
         assertThat(selected).isEqualTo(1);
+        selected = input.askInt("Enter menu:");
+        assertThat(selected).isEqualTo(3);
     }
 
     @Test
@@ -47,10 +49,6 @@ class ValidateInputTest {
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");
-        String str = "";
-        if (selected < 0 || selected >= 7) {
-            str = "Wrong input, you can select: 0 .. 6";
-        }
-        assertThat(str).isEqualTo("Wrong input, you can select: 0 .. 6");
+        assertThat(selected).isEqualTo(-1);
     }
 }
