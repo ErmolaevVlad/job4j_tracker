@@ -8,68 +8,12 @@ public class PasswordValidator {
         if (password.length() < 8 || password.length() > 32) {
             throw new IllegalArgumentException("Password should be length [8, 32]");
         }
-        if (!isUpperLetterTest(password)) {
-            throw new IllegalArgumentException("Password should contain at least one uppercase letter");
-        }
-        if (!isLowerLetterTest(password)) {
-            throw new IllegalArgumentException("Password should contain at least one lowercase letter");
-        }
-        if (!isNumber(password)) {
-            throw new IllegalArgumentException("Password should contain at least one figure");
-        }
-        if (!isSpecialSymbol(password)) {
-            throw new IllegalArgumentException("Password should contain at least one special symbol");
-        }
         if (isStandard(password)) {
             throw new IllegalArgumentException("Password shouldn't contain substrings: qwerty, 12345, "
                     + "password, admin, user");
         }
+        correct(password);
         return password;
-    }
-
-    public static boolean isUpperLetterTest(String password) {
-        for (int index = 0; index < password.length(); index++) {
-            if (password.codePointAt(index) >= 65 && password.codePointAt(index) <= 90) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean isLowerLetterTest(String password) {
-        for (int index = 0; index < password.length(); index++) {
-            if (password.codePointAt(index) >= 97 && password.codePointAt(index) <= 122) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean isSpecialSymbol(String password) {
-        for (int index = 0; index < password.length(); index++) {
-            if (password.codePointAt(index) >= 33 && password.codePointAt(index) <= 47) {
-                return true;
-            }
-            if (password.codePointAt(index) >= 58 && password.codePointAt(index) <= 64) {
-                return true;
-            }
-            if (password.codePointAt(index) >= 91 && password.codePointAt(index) <= 96) {
-                return true;
-            }
-            if (password.codePointAt(index) >= 123 && password.codePointAt(index) <= 126) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean isNumber(String password) {
-        for (int index = 0; index < password.length(); index++) {
-            if (password.codePointAt(index) >= 48 && password.codePointAt(index) <= 57) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public static boolean isStandard(String password) {
@@ -80,5 +24,35 @@ public class PasswordValidator {
             }
         }
         return false;
+    }
+
+    public static void correct(String password) {
+        boolean lowerLetter = false;
+        boolean upperLetter = false;
+        boolean specialSymbol = false;
+        boolean number = false;
+        for (int i = 0; i < password.length(); i++) {
+            if (Character.isLowerCase(password.codePointAt(i))) {
+                lowerLetter = true;
+            } else if (Character.isUpperCase(password.codePointAt(i))) {
+                upperLetter = true;
+            } else if (Character.isDigit(password.codePointAt(i))) {
+                number = true;
+            } else {
+                specialSymbol = true;
+            }
+        }
+        if (!upperLetter) {
+            throw new IllegalArgumentException("Password should contain at least one uppercase letter");
+        }
+        if (!lowerLetter) {
+            throw new IllegalArgumentException("Password should contain at least one lowercase letter");
+        }
+        if (!number) {
+            throw new IllegalArgumentException("Password should contain at least one figure");
+        }
+        if (!specialSymbol) {
+            throw new IllegalArgumentException("Password should contain at least one special symbol");
+        }
     }
 }
