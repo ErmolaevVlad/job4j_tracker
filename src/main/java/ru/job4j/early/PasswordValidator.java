@@ -32,7 +32,9 @@ public class PasswordValidator {
         boolean specialSymbol = false;
         boolean number = false;
         for (int i = 0; i < password.length(); i++) {
-            if (Character.isLowerCase(password.codePointAt(i))) {
+            if (lowerLetter && upperLetter && number && specialSymbol) {
+                break;
+            } else if (Character.isLowerCase(password.codePointAt(i))) {
                 lowerLetter = true;
             } else if (Character.isUpperCase(password.codePointAt(i))) {
                 upperLetter = true;
