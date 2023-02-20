@@ -22,7 +22,7 @@ public class ReconstructPhrase {
 
     private String getDescendingElements() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int index = 0; index < descendingElements.size();) {
+        while (descendingElements.size() > 0) {
             stringBuilder.append(descendingElements.pollLast());
         }
         return stringBuilder.toString();
