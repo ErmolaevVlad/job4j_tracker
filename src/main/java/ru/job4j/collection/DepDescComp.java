@@ -12,11 +12,11 @@ public class DepDescComp implements Comparator<String> {
      */
     @Override
     public int compare(String o1, String o2) {
-        String [] tmp1 = o1.split("/");
-        String [] tmp2 = o2.split("/");
-        int rsl =0;
-        for (int index = 0; index < tmp1.length; index++ ) {
-            if (index > tmp2.length -1) {
+        String[] tmp1 = o1.split("/");
+        String[] tmp2 = o2.split("/");
+        int rsl = 0;
+        for (int index = 0; index < tmp1.length; index++) {
+            if (index > tmp2.length - 1) {
                 rsl = 1;
                 break;
             }
