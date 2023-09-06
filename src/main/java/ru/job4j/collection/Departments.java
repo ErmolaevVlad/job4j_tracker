@@ -15,8 +15,9 @@ public class Departments {
         for (String value : deps) {
             String start = "";
             for (String el : value.split("/")) {
-                tmp.add(start + el);
-                start = start + el + "/";
+                start = start + el;
+                tmp.add(start);
+                start = start + "/";
             }
         }
         return new ArrayList<>(tmp);
