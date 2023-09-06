@@ -14,12 +14,7 @@ public class DepDescComp implements Comparator<String> {
     public int compare(String o1, String o2) {
         String[] tmp1 = o1.split("/");
         String[] tmp2 = o2.split("/");
-        int rsl;
-        rsl = tmp2[0].compareTo(tmp1[0]);
-        if (rsl == 0) {
-            return o1.compareTo(o2);
-        }
-        return rsl;
+        int rsl = tmp2[0].compareTo(tmp1[0]);
+        return rsl == 0 ? o1.compareTo(o2) : rsl;
     }
 }
-
