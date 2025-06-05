@@ -90,10 +90,11 @@ public class SqlTracker implements Store {
     public List<Item> findAll() {
         List<Item> items = new ArrayList<>();
         try (PreparedStatement statement =
-                connection.prepareStatement("SELECT id, name FROM items")) {
+                connection.prepareStatement("SELECT id, name, created FROM items")) {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                items.add(new Item(rs.getInt("id"), rs.getString("name")));
+                items.add(new Item(rs.getInt("id"), rs.getString("name"),
+                        rs.getTimestamp("created").toLocalDateTime()));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -105,11 +106,12 @@ public class SqlTracker implements Store {
     public List<Item> findByName(String key) {
         List<Item> items = new ArrayList<>();
         try (PreparedStatement statement =
-                connection.prepareStatement("SELECT id, name FROM items WHERE name = ?")) {
+                connection.prepareStatement("SELECT id, name, created FROM items WHERE name = ?")) {
             statement.setString(1, key);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                items.add(new Item(rs.getInt("id"), rs.getString("name")));
+                items.add(new Item(rs.getInt("id"), rs.getString("name"),
+                        rs.getTimestamp("created").toLocalDateTime()));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -121,11 +123,12 @@ public class SqlTracker implements Store {
     public Item findById(int id) {
         Item item = null;
         try (PreparedStatement statement =
-                     connection.prepareStatement("SELECT id, name FROM items WHERE id = ?")) {
+                     connection.prepareStatement("SELECT id, name, created FROM items WHERE id = ?")) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                item = new Item(rs.getInt("id"), rs.getString("name"));
+                item = new Item(rs.getInt("id"), rs.getString("name"),
+                        rs.getTimestamp("created").toLocalDateTime());
             }
         } catch (Exception e) {
             e.printStackTrace();
