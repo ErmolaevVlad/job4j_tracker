@@ -83,7 +83,6 @@ public class SqlTracker implements Store {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
